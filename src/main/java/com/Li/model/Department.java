@@ -19,6 +19,12 @@ import java.util.List;
  * otherwise, it must be specified.
  */
 
+/**
+ * In a one-to-many relationship, each row of one entity is referenced by many child
+ * records in another entity. The important thing is that children's records cannot have
+ * multiple parents. In a one-to-many relationship between Table A and Table B, each row
+ * in Table A is linked to 0, 1, or many rows in Table B.
+ */
 
 @Entity
 @Table
