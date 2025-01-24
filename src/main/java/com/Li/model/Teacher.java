@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.Set;
 
 /**
  * ● The @OneToOne annotation is used to map the source entity with the target entity.
@@ -23,6 +24,15 @@ import java.io.Serializable;
  * only. That is a typical example of a one-to-one relationship or association. We
  * will model this in a database, and we will need to store the primary key of the
  * Address record as a foreign key in the Person table.
+ *
+ * This association is unidirectional. Here, the Teacher is on the owner's side, and
+ * the Cohort is on the other side.
+ * We can see that the Teacher class has a collection (Set<E>) of elements, because
+ * when you map a many-to-many association, you should use a Set instead of a List as
+ * the attribute type. Otherwise, Hibernate will take a very inefficient approach to removing
+ * entities from the association. It will remove all records from the association table and
+ * re-insert the remaining ones. You can avoid this by using a Set instead of a List as the
+ * attribute type.
  */
 @Entity
 @Table
@@ -36,15 +46,32 @@ public class Teacher implements Serializable {
     private String salary;
     private String teacherName;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Address address;
+    @ManyToMany(targetEntity = Cohort.class)
+    private Set<Cohort> cohort;
 
-    public Address getAddress() {
-        return address;
+    public Set<Cohort> getCohort() {
+        return cohort;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setCohort(Set<Cohort> cohort) {
+        this.cohort = cohort;
+    }
+
+    //    @OneToOne(cascade = CascadeType.ALL)
+//    private Address address;
+
+//    public Address getAddress() {
+//        return address;
+//    }
+//
+//    public void setAddress(Address address) {
+//        this.address = address;
+//    }
+
+    public Teacher(String salary, String teacherName, Set<Cohort> cohort) {
+        this.salary = salary;
+        this.teacherName = teacherName;
+        this.cohort = cohort;
     }
 
 

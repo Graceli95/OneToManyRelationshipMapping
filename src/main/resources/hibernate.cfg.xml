@@ -22,5 +22,6 @@
         <mapping class="com.Li.model.Teacher"/>
         <mapping class="com.Li.model.Department"/>
         <mapping class="com.Li.model.Address"/>
+        <mapping class="com.Li.model.Cohort"/>
     </session-factory>
 </hibernate-configuration>
