@@ -21,5 +21,6 @@
         <!-- Mapping entity file -->
         <mapping class="com.Li.model.Teacher"/>
         <mapping class="com.Li.model.Department"/>
+        <mapping class="com.Li.model.Address"/>
     </session-factory>
 </hibernate-configuration>
